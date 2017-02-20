@@ -1,5 +1,3 @@
-package TextGame;
-
 public class Room {
 
 public int [][] RoomArray;
