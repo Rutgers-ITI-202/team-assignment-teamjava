@@ -1,3 +1,5 @@
+package adventure;
+
 public class Room {
 
 public int [][] RoomArray;
