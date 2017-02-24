@@ -22,7 +22,7 @@ public String getName() {
 	return Name;
 }
 
-public String displayRoom(Adventurer james){
+public String displayRoom(Adventurer james, Pokemons Pika){
 		
 	StringBuffer layout = new StringBuffer ("");
 		for(int row = 0; row < RoomArray.length; row++){
@@ -31,11 +31,13 @@ public String displayRoom(Adventurer james){
 				if(row == james.X && col == james.Y){
 					layout.append(".] ");
 					
-				} 
-				
-				if(row!= james.X || col != james.Y){
-					layout.append(" ] ");
+				} else if(row == Pika.X && col == Pika.Y){
+					layout.append("P] ");
 				}
+				
+				if((row!= james.X || col != james.Y) && layout.toString().contains("P") == false){
+					layout.append(" ] ");
+				} 
 				
 				
 			}
@@ -45,4 +47,31 @@ public String displayRoom(Adventurer james){
 		
 		return layout.toString();
 		}
+
+public static void main(String [] args){
+	Room first = new Room();
+	Adventurer james = new Adventurer();
+	Pokemons Pika = new Pokemons();
+	System.out.println(first.displayRoom(james, Pika));
+	james.MoveNorth();
+	System.out.println();
+	System.out.println();
+	System.out.println(first.displayRoom(james, Pika));
+	james.MoveSouth();
+	james.MoveEast();
+	System.out.println();
+	System.out.println();
+	System.out.println(first.displayRoom(james, Pika));
+	james.MoveSouth();
+	System.out.println(first.displayRoom(james, Pika));
+	james.MoveEast();
+	james.MoveEast();
+	james.MoveNorth();
+	james.MoveNorth();
+	james.MoveNorth();
+	james.MoveNorth();
+	james.MoveNorth();
+	System.out.println(first.getDescription());
+}
+	
 }
