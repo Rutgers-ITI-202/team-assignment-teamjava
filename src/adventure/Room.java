@@ -6,13 +6,33 @@ public int [][] RoomArray;
 public boolean hasPlayer;
 public String Name;
 public String Description;
+public String Stage;
 
-public Room (){
+
+public Room (String name){
 this.hasPlayer = true;
 this.RoomArray = new int [5][5];
 this.Name = "The beginning";
 this.Description = "This is the beginning of your adventure! Look around, find Pokeballs, and capture Pokemons to pass roadblocks!";
+this.Stage = name;
 }
+
+public void setStage(String name){
+Stage = name;
+}
+
+public void Initialize (){
+
+	if(Stage.equalsIgnoreCase("Kanto")){
+		RoomArray = new int [5][5];
+	}
+	
+	if(Stage.equalsIgnoreCase("Hoenn")){
+		RoomArray = new int [6][6];
+	}
+	
+}
+
 
 public String getDescription() {
 	return Description;
@@ -49,7 +69,7 @@ public String displayRoom(Adventurer james, Pokemons Pika){
 		}
 
 public static void main(String [] args){
-	Room first = new Room();
+	Room first = new Room("Kanto");
 	Adventurer james = new Adventurer();
 	Pokemons Pika = new Pokemons();
 	System.out.println(first.displayRoom(james, Pika));
