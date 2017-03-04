@@ -10,6 +10,7 @@ An adventurer can:
 */
 
 package adventure;
+import java.util.*;
 
 public class Adventurer {
 public String name; // Given name to the adventurer
@@ -19,14 +20,20 @@ public ArrayList inventory; // Arraylist that stores the Adventurer's items
 public Pokemons [] pokemons; // Array that sotres Pokemons objects
 public int TeamSize; // How many pokemons adventurer has on team
 
+public int worldX; // Adventurer's X coordinate on the world map
+public int worldY; // Adventurer's Y coordinate on the world map
+
 public Adventurer (){
 	
-	this.X = 0;
+	this.X = 4;
 	this.Y = 0;
 	this.name = "James";
 	this.inventory = new ArrayList();
 	this.pokemons = new Pokemons[6]; // the adventurer can have a max team of 6 pokemons
 	this.TeamSize = 0;
+	
+	this.worldX = 0;
+	this.worldY = 0;
 }
 
 public void Pick (Object item){ // Adds item object to inventory ArrayList.
