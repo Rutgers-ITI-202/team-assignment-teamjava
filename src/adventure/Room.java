@@ -1,5 +1,4 @@
 package adventure;
-
 public class Room {
 
 public int [][] RoomArray;
@@ -55,7 +54,7 @@ public String displayRoom(Adventurer james, Pokemons Pika){
 					layout.append("P] ");
 				}
 				
-				if((row!= james.X || col != james.Y) && layout.toString().contains("P") == false){
+				else if((row!= james.X || col != james.Y)){
 					layout.append(" ] ");
 				} 
 				
@@ -69,9 +68,10 @@ public String displayRoom(Adventurer james, Pokemons Pika){
 		}
 
 public static void main(String [] args){
-	Room first = new Room("Kanto");
+	Room first = new Room("Hoenn");
 	Adventurer james = new Adventurer();
 	Pokemons Pika = new Pokemons();
+	first.Initialize();
 	System.out.println(first.displayRoom(james, Pika));
 	james.MoveNorth();
 	System.out.println();
