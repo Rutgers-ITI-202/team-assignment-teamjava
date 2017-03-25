@@ -26,4 +26,8 @@ this.CanRockSmash = false;
 this.CanSurf = false;
 }
 
+public static void main(String [] args){
+Pokemons pikachu = new Pokemons();
+}
+
 }
