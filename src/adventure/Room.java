@@ -6,6 +6,7 @@ public boolean hasPlayer;
 public String Name;
 public String Description;
 public String Stage;
+Pokemons Pika;
 
 
 public Room (String name){
@@ -20,7 +21,7 @@ public void setStage(String name){
 Stage = name;
 }
 
-public void Initialize (){
+/**public void Initialize (){
 
 	if(Stage.equalsIgnoreCase("Kanto")){
 		RoomArray = new int [5][5];
@@ -30,7 +31,7 @@ public void Initialize (){
 		RoomArray = new int [6][6];
 	}
 	
-}
+}*/ 
 
 
 public String getDescription() {
@@ -57,12 +58,9 @@ public String displayRoom(Adventurer james, Pokemons Pika){
 				else if((row!= james.X || col != james.Y)){
 					layout.append(" ] ");
 				} 
-				
-				
 			}
 			layout.append("\n");
 			}
-		
 		
 		return layout.toString();
 		}
@@ -71,27 +69,6 @@ public static void main(String [] args){
 	Room first = new Room("Hoenn");
 	Adventurer james = new Adventurer();
 	Pokemons Pika = new Pokemons();
-	first.Initialize();
 	System.out.println(first.displayRoom(james, Pika));
-	james.MoveNorth();
-	System.out.println();
-	System.out.println();
-	System.out.println(first.displayRoom(james, Pika));
-	james.MoveSouth();
-	james.MoveEast();
-	System.out.println();
-	System.out.println();
-	System.out.println(first.displayRoom(james, Pika));
-	james.MoveSouth();
-	System.out.println(first.displayRoom(james, Pika));
-	james.MoveEast();
-	james.MoveEast();
-	james.MoveNorth();
-	james.MoveNorth();
-	james.MoveNorth();
-	james.MoveNorth();
-	james.MoveNorth();
-	System.out.println(first.getDescription());
 }
-	
 }
