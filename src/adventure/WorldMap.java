@@ -37,10 +37,9 @@ public static void main (String [] args){
 	WorldMap Map = new WorldMap(james);
 	System.out.println(Map.display(james));
 	Room kanto = new Room ("Kanto");
-	kanto.Initialize();
 	Map.getArray()[0][0] = kanto;
 	Room hoenn = new Room ("Hoenn");
-	Map.getArray()[0][1] = hoenn;    // Hardcoding and assigning rooms to the Worldmap (Room2DArray)
+	Map.getArray()[0][1] = hoenn;    //Hardcoding and assigning rooms to the Worldmap (Room2DArray)
 	
 }
 
