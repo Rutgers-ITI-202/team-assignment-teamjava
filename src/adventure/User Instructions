@@ -1,0 +1,64 @@
+Overview
+
+You are a Ditto and your end goal is to reach the Rare Candy that you have heard was in a hidden area. There are many obstacles in your way and as a Ditto, you can not easily travel around the Pokemon world due to the various obstacles:Water terrain, trees, rocks, etc..You must find other Pokemon to transform into to be able to traverse around these various obstacles to find the Rare Candy. 
+
+Controls:
+MoveNorth - character moves north
+
+MoveSouth - character moves south
+
+MoveWest - character moves west
+
+MoveEast - character moves east
+
+Transform - character transforms into selected pokemon
+
+ViewTransformation - views character’s current transformation
+
+Pick - pick up item
+
+ViewInventory - views inventory
+
+Items:
+
+Berry - Use berries to get help from other pokemon. 
+
+Rare Candy - final goal to win the game
+
+PP Restore - use pp restore to refill power points
+
+Poke Flute -  use this to wake up Snorlax
+
+Pokemon:
+
+Ditto - The transform pokemon. Capable of reorganizing its cells to transform into an exact duplicate of its enemy. It is usually a shapeless blob. This is the pokemon you play as which can transform into different pokemon. 
+
+Pidgey - the tiny bird pokemon. Very docile. If attacked, it will often kick up sand to protect itself rather than fight back.
+
+Lapras - the transport pokemon. A gentle soul that can read the minds of people. It can ferry people across the sea on its back.
+
+Sandslash - The mouse pokemon. It is skilled at slashing enemies with its claws. If broken, they start to grow back in a day.
+
+Zubat - The bat pokemon. Emits ultrasonic cries while it flies. They act as a sonar used to check for objects in its way.
+
+Snorlax - the sleeping pokemon. Will eat anything, even if the food happens to be a little moldy. It never gets an upset stomach.
+
+Moves:
+
+Fly - use this ability to fly over some unpassable terrain. This ability is also able to allow the user to go to other parts of the map the user has already completed.
+
+Surf - this ability allows the user to traverse bodies of water
+
+Cut - this ability cuts down trees that are in the way
+
+Rock Smash - this ability allows you to break rocks that block the way
+
+
+
+
+
+
+
+
+
+
