@@ -1,4 +1,4 @@
-package TextGame;
+package adventure;
 
 public class obstacle {
 private int X;
