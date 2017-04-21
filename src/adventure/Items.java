@@ -1,4 +1,4 @@
-package TextGame;
+package adventure;
 import java.util.*;
 
 public class Items {
