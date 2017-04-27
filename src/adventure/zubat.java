@@ -1,4 +1,4 @@
-package TextGame;
+package adventure;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
