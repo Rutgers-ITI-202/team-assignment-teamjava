@@ -14,14 +14,15 @@ import java.util.*;
 
 public class Adventurer extends Pokemons {
 private String name; // Given name to the adventurer
-private 	int X; // X coordinate position of the adventurer
+private	int X; // X coordinate position of the adventurer
 private int Y; // Y coordinate position of the adventurer
 private ArrayList<Items> inventory; // Arraylist that stores the Adventurer's items
-private Pokemons [] TransformList; // Array that sotres Pokemons objects
-private int PP;
-private int HP;
+private ArrayList <Pokemons> TransformList; // ArrayList that sotres Pokemons objects
+protected int PP;
+protected int HP;
 private int level;
-private int maxHP;
+protected int maxHP;
+protected String currentForm; // String representation of Ditto's current transformation
 
 private int worldX; // Adventurer's X coordinate on the world map
 private int worldY; // Adventurer's Y coordinate on the world map
@@ -32,7 +33,8 @@ public Adventurer (){
 	this.Y = 0;
 	this.name = "Ditto";
 	this.inventory = new ArrayList();
-	this.TransformList = new Pokemons[6]; // the adventurer can transform into a maximum of 6 pokemons
+	this.TransformList = new ArrayList<Pokemons>(); // the adventurer can transform into a list of pokemons that he/she encounters 
+	this.currentForm = "Ditto";
 	
 	this.worldX = 0;
 	this.worldY = 0;
@@ -40,6 +42,22 @@ public Adventurer (){
 	this.HP = 50;
 	this.maxHP = 50;
 	this.PP = 5;
+	
+	this.CanCut = false;
+	this.CanDive = false;
+	this.CanFly = false;
+	this.CanRockSmash = false;
+	this.CanSurf = false;
+
+}
+
+public void showStatus(){
+	System.out.println("Current status: ");
+	System.out.println("Current transform: " + currentForm);
+	System.out.println("HP: " + HP + "/" + maxHP);
+	System.out.println("PP: " + PP);
+	System.out.println();
+	
 }
 
 public void setmaxHP(int x){
@@ -56,6 +74,14 @@ HP = x;
 
 public int getHP(){
 	return HP;
+}
+
+public int getPP(){
+	return PP;
+}
+
+public void setPP(int i){
+	PP = i;
 }
 
 public void setName(String NickName){
@@ -98,20 +124,76 @@ public int getWorldY(){
 	return worldY;
 }
 
-public void transform(Pokemons target){
+public void addTransfrom(Pokemons pokemon){ // adds pokemons to the Adventurer's list of tranformable pokemons
+	TransformList.add(pokemon);
+}
+
+public void viewTransform(){
+	if(TransformList.isEmpty() == false){
+	for(int i = 0; i < TransformList.size(); i++){
+		System.out.print(TransformList.get(i).getName() + " ");
+	}
+	System.out.println();
+}
+	else{
+		System.out.println("There are no available transformations right now!");
+		System.out.println();
+	}
+}
+
+public ArrayList<Pokemons> getTransform(){
+	return TransformList;
+}
+
+public void transform(String Poke){
 	
+	if(PP == 0){
+		System.out.println("No more PP left for transform!");
+		return;
+	}
+	
+	boolean transformed = false;
+	for(int i = 0; i < TransformList.size(); i++){
+	if(TransformList.get(i).getName().replaceAll(" ", "").equalsIgnoreCase(Poke.replaceAll(" ", ""))){
+		
+		transformed = true;
+		currentForm = TransformList.get(i).getName();
+		
+		
+		CanCut = TransformList.get(i).CanCut;
+		CanRockSmash = TransformList.get(i).CanRockSmash;
+		CanSurf = TransformList.get(i).CanSurf;
+		CanFly = TransformList.get(i).CanFly;
+		 // copying the obstacle bypassing abilities
+		
+		System.out.println(name + " has succesfully transformed into " + TransformList.get(i).getName() + "!");
+		System.out.println();
+		PP = PP -1;
+	}
+	}
+	
+	if(transformed = false){
+		System.out.println("No matching transformation found, transform failed!");
+	}
 }
 
-public void Pick (Items item){ // Adds item object to inventory ArrayList.
-if(item.getX() == X && item.getY() == Y){
-	inventory.add(item);
-	System.out.println(name + " picked up " + item.getName() + "!");
-	item.setX(100); // the item is no longer on the grid
-	item.setY(100);
-}
+public void Pick (Room room){ // Adds item object to inventory ArrayList.
+	boolean itemFound = false;
+	for(int i = 0; i < room.getItems().size(); i++){
+	if(room.getItems().get(i).getX() == X && room.getItems().get(i).getY() == Y){
+		inventory.add(room.getItems().get(i));
+		room.getItems().get(i).setX(100);
+		room.getItems().get(i).setY(100);
+		itemFound = true;
+		System.out.println(name + " picked up " + room.getItems().get(i).getName() + "!");
+		System.out.println();
+		}
+	}
 
-else {System.out.println("There is nothing to pick up here" + "\n");}
-
+	if(itemFound == false){
+	System.out.println("There is nothing to pick up here!");
+	System.out.println();
+	}
 }
 
 public void ViewInventory(){ // Views inventory and prints toString representation of inventory ArrayList.
@@ -119,12 +201,38 @@ public void ViewInventory(){ // Views inventory and prints toString representati
 	
 	if(inventory.isEmpty() == true){
 		System.out.println("Empty");
+		System.out.println();
 	}
 	else{
 	for(int i = 0; i < inventory.size(); i++){
-		System.out.print(inventory.get(i).getName() + " ");
+		System.out.print(inventory.get(i).getName() + ". ");
 	}
 	System.out.println();
+	System.out.println();
+	}
+}
+
+protected void addToInventory(Items x){ // Developer's method for adding to inventory
+inventory.add(x);	
+}
+
+public ArrayList<Items> getInventory(){
+	return inventory;
+}
+
+public void UseFlute(Adventurer Ditto, Room Current){
+
+	boolean fluteFound = false;
+	for(int i = 0; i < inventory.size(); i++){
+	if(inventory.get(i) instanceof pokeflute){
+	((pokeflute)(inventory.get(i))).function(Ditto, Current);	
+	//System.out.println(name + " used " +  ((pokeflute) inventory.get(i)).getName() + ", " + ((pokeflute) inventory.get(i)).functionToString());
+	fluteFound = true;
+	}
+}
+	if(fluteFound == false){
+		System.out.println("You do not have a poke flute!");
+		System.out.println();
 	}
 }
 
@@ -134,21 +242,30 @@ if(inventory.get(i).getName().replaceAll(" ", "").equalsIgnoreCase(item.trim().r
 
 if((inventory.get(i)) instanceof sitrusBerry){
 ((sitrusBerry) inventory.get(i)).function(Ditto);
+System.out.println(name + " used " +  ((sitrusBerry) inventory.get(i)).getName() + " and " + ((sitrusBerry) inventory.get(i)).functionToString());
+System.out.println();
+inventory.remove(i);
+return;
 }
+
+if((inventory.get(i)) instanceof ppRestore){
+((ppRestore) inventory.get(i)).function(Ditto);
+System.out.println(name + " used " +  ((ppRestore) inventory.get(i)).getName() + " and " + ((ppRestore) inventory.get(i)).functionToString());
+System.out.println();
+inventory.remove(i);
+return;
+}
+
+
 }
 
 // add other instances of items here
 
-else{
+
+}
+
 System.out.println("Item does not exist...");
-break;
-}
-
-System.out.println(name + " used " +  ((sitrusBerry) inventory.get(i)).getName() + " and " + ((sitrusBerry) inventory.get(i)).functionToString());
-inventory.remove(i);
-break;
-
-}
+System.out.println();
 }
 
 public void checkPass(obstacle ob) { // determines if the adventurer has the ability to pass an obstacle
@@ -156,9 +273,26 @@ public void checkPass(obstacle ob) { // determines if the adventurer has the abi
 if(ob instanceof sky){
 if(canFly() == true){
 ob.setPassable();	
-}
+		}
+	}
+
+if(ob instanceof water){
+	if(canSurf() == true){
+		ob.setPassable();
+	}
 }
 
+if(ob instanceof tree){
+	if(canCut() == true){
+		ob.setPassable();
+	}
+}
+
+if(ob instanceof rock){
+	if(canRockSmash() == true){
+		ob.setPassable();
+	}
+}
 
 
 }
@@ -180,14 +314,32 @@ public void MoveNorth(Room room){ //Updates Adventurer's X coordinate (-1), para
 				X = X +1;
 				System.out.println(room.getObstacles().get(i).getDescription());
 			}
+			if(room.getObstacles().get(i).seePass() == true){
+				System.out.println(name + "(" + currentForm + ") used " + room.getObstacles().get(i).passAbility + " and bypassed the obstacle!");
+				System.out.println();
+			}
 		}
-	}
+	} // Obstacle check
+	
+	for(int i = 0; i < room.getItems().size(); i++){
+		if(X == room.getItems().get(i).getX() && Y == room.getItems().get(i).getY()){
+			System.out.println("There is an item nearby, look around!");
+			System.out.println();
+		}
+	} // Item check
+	
+	for(int i = 0; i < room.getPokemons().size(); i++){
+		if(X == room.getPokemons().get(i).getX() && Y == room.getPokemons().get(i).getY()){
+			System.out.println("There is a Pokemon nearby, look around!");
+			System.out.println();
+		}
+	} // Pokemon check
 	
 }
 
 public void MoveSouth(Room room){ //Updates Adventurer's X coordinate (+1)
 	X = X+1;
-	if (X > room.getArray()[0].length-1) {
+	if (X >= room.getArray().length) {
 		X = X-1;
 		System.out.println("The adventurer cannot move south anymore.");
 		System.out.println();
@@ -200,8 +352,28 @@ public void MoveSouth(Room room){ //Updates Adventurer's X coordinate (+1)
 				X = X - 1;
 				System.out.println(room.getObstacles().get(i).getDescription());
 			}
+			
+			if(room.getObstacles().get(i).seePass() == true){
+				System.out.println(name + "(" + currentForm + ") used " + room.getObstacles().get(i).passAbility + " and bypassed the obstacle!");
+				System.out.println();
+			}
+		
 		}
 	}
+	
+	for(int i = 0; i < room.getItems().size(); i++){
+		if(X == room.getItems().get(i).getX() && Y == room.getItems().get(i).getY()){
+			System.out.println("There is an item nearby, look around!");
+			System.out.println();
+		}
+	} // Item check
+	
+	for(int i = 0; i < room.getPokemons().size(); i++){
+		if(X == room.getPokemons().get(i).getX() && Y == room.getPokemons().get(i).getY()){
+			System.out.println("There is a Pokemon nearby, look around!");
+			System.out.println();
+		}
+	} // Pokemon check
 	
 }
 
@@ -220,9 +392,29 @@ public void MoveWest(Room room) { //Updates Adventurer's Y coordinate (-1)
 				Y = Y + 1;
 				System.out.println(room.getObstacles().get(i).getDescription());
 			}
+			
+			if(room.getObstacles().get(i).seePass() == true){
+				System.out.println(name + "(" + currentForm + ") used " + room.getObstacles().get(i).passAbility + " and bypassed the obstacle!");
+				System.out.println();
+			}
+			
+			
 		}
 	}
 	
+	for(int i = 0; i < room.getItems().size(); i++){
+		if(X == room.getItems().get(i).getX() && Y == room.getItems().get(i).getY()){
+			System.out.println("There is an item nearby, look around!");
+			System.out.println();
+		}
+	} // Item check
+	
+	for(int i = 0; i < room.getPokemons().size(); i++){
+		if(X == room.getPokemons().get(i).getX() && Y == room.getPokemons().get(i).getY()){
+			System.out.println("There is a Pokemon nearby, look around!");
+			System.out.println();
+		}
+	} // Pokemon check	
 }
 
 public void MoveEast(Room room) { //Updates Adventurer's Y coordinate (+1)
@@ -240,22 +432,59 @@ public void MoveEast(Room room) { //Updates Adventurer's Y coordinate (+1)
 				Y = Y - 1;
 				System.out.println(room.getObstacles().get(i).getDescription());
 			}
+			
+			if(room.getObstacles().get(i).seePass() == true){
+				System.out.println(name + "(" + currentForm + ") used " + room.getObstacles().get(i).passAbility + " and bypassed the obstacle!");
+				System.out.println();
+			}
 		}
 	}
 	
-}
+	for(int i = 0; i < room.getItems().size(); i++){
+		if(X == room.getItems().get(i).getX() && Y == room.getItems().get(i).getY()){
+			System.out.println("There is an item nearby, look around!");
+			System.out.println();
+		}
+	} // Item check
+	
+	for(int i = 0; i < room.getPokemons().size(); i++){
+		if(X == room.getPokemons().get(i).getX() && Y == room.getPokemons().get(i).getY()){
+			System.out.println("There is a Pokemon nearby, look around!");
+			System.out.println();
+		}
+	} // Pokemon check
+	
+} // End of Move
 
+	public void Talk(Pokemons x){ // Talking to pokemons displays their assigned dialogues
+	
+	if(x instanceof pidgey){	
+		((pidgey)x).showDialogue(this);	
+	}
+	
+	if(x instanceof Lapras)
+	{
+		((Lapras)x).showDialogue(this);
+	}
+	
+	if(x instanceof SandSlash){
+		((SandSlash)x).showDialogue(this);
+	}
+	
+	if(x instanceof zubat){
+		((zubat)x).showDialogue(this);
+	}
+	
+	if(x instanceof squirtle){
+		((squirtle)x).showDialogue(this);
+	}
+	
+	}
+	
+	
+	
 public static void main(String [] args){
 
-	sitrusBerry berry = new sitrusBerry();
-	Adventurer Ditto = new Adventurer();
-	Ditto.Pick(berry);
-	Ditto.ViewInventory();
-	Ditto.setHP(30);
-	System.out.println(Ditto.getHP());
-	Ditto.Use("sitrus berry", Ditto);
-	System.out.println(Ditto.getHP());
-	
 }
 
 }
