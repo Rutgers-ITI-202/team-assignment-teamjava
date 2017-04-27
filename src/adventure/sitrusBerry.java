@@ -4,10 +4,12 @@ public class sitrusBerry extends Items {
 
 private String functionToString;
 	
-public sitrusBerry(){
+public sitrusBerry(int x, int y){
 this.setDescription("Consumable berry that heals for 20 HP.");
 this.setName("Sitrus Berry");
 this.functionToString = ("healed for 20 HP");
+this.setX(x);
+this.setY(y);
 }
 
 public void function(Adventurer james){
