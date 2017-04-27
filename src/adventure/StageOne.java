@@ -16,12 +16,14 @@ sky ob11 = new sky(3,4);
 sky ob12 = new sky(3,5);
 sky ob13 = new sky(4,4);
 sky ob14 = new sky(4,5);
-
-sitrusBerry berry = new sitrusBerry();
+sitrusBerry berry = new sitrusBerry(0,3);
+pidgey P = new pidgey(1,4);
 
 public StageOne(){
 super ("Stage One (Cliffside)");
 super.setRoomArray(map);
+this.tpX1 = 6;
+this.tpY1 = 5;
 this.setDescription("Cliffside area, the bridge connecting to the other side is broken.");
 this.addObstacle(ob1);
 this.addObstacle(ob2);
@@ -37,22 +39,47 @@ this.addObstacle(ob11);
 this.addObstacle(ob12);
 this.addObstacle(ob13);
 this.addObstacle(ob14);
-this.berry.setX(0);
-this.berry.setY(3);
+this.addItem(berry);
+this.addPokemon(P);
 }
+
+public Room teleport(Adventurer Ditto){
+	if(Ditto.getX() == tpX1 && Ditto.getY() == tpY1){
+		System.out.println("New area reached: Riverside");
+		System.out.println();
+		
+		Ditto.setX(0);
+		Ditto.setY(0);
+		StageTwo Two = new StageTwo();
+		return Two;
+	}
 	
+	return null;
+}
+
+
+
 public static void main(String [] args){
 Adventurer james = new Adventurer();
 pidgey npc = new pidgey(1,5);
 StageOne One = new StageOne();
-sitrusBerry berry = new sitrusBerry();
-System.out.println(One.displayRoom(james, npc, berry));
+sitrusBerry berry = new sitrusBerry(1,3);
+System.out.println(One.displayRoom(james));
 james.MoveEast(One);
 james.MoveEast(One);
-james.MoveSouth(One);
-james.MoveSouth(One);
-james.MoveSouth(One);
-System.out.println(One.displayRoom(james, npc, berry));
+james.MoveEast(One);
+System.out.println(One.displayRoom(james));
+james.Pick(One);
+james.MoveEast(One);
+System.out.println(One.displayRoom(james));
+james.ViewInventory();
+james.setHP(10);
+james.showStatus();
+james.Use("sitrus berry", james);
+james.ViewInventory();
+james.showStatus();
+
+
 }
 
 }
