@@ -1,4 +1,4 @@
-package TextGame;
+package adventure;
 
 public class tree extends obstacle {
 	public tree(int x, int y){
