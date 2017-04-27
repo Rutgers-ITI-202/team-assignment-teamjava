@@ -5,12 +5,14 @@ private int X;
 private int Y;
 private boolean passable;
 private String description;
+protected String passAbility;
 
 public obstacle(int x, int y){
 this.passable = false;
 this.X = x;
 this.Y = y;
 this.description = "Obstacle ahead, think of a way to get around it...";
+this.passAbility = "Nice Ability";
 }
 
 public boolean seePass(){
