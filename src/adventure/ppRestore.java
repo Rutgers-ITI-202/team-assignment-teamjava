@@ -1,4 +1,4 @@
-package TextGame;
+package adventure;
 
 public class ppRestore extends Items {
 
