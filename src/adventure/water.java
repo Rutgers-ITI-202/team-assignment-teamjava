@@ -1,4 +1,4 @@
-package TextGame;
+package adventure;
 
 public class water extends obstacle {
 	public water(int x, int y){
