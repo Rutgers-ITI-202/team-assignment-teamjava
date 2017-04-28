@@ -1,4 +1,4 @@
-package TextGame;
+package adventure;
 
 public class StageEx2 extends Room {
 	private int [][] map = new int [5][7];
