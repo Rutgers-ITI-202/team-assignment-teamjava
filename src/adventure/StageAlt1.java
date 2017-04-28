@@ -24,6 +24,14 @@ public class StageAlt1 extends Room{
 			return four;
 		}
 		
+		if(Ditto.getX() == tpX2 && Ditto.getY() == tpY2){
+			System.out.println("New area reached: Dark Cave Inner A");
+			Ditto.setX(0);
+			Ditto.setY(0);
+			StageAlt2 alt2 = new StageAlt2();
+			return alt2;
+		}
+		
 		return null;
 	}
 	
