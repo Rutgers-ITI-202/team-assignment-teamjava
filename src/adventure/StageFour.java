@@ -56,10 +56,19 @@ if(Ditto.getX() == tpX1 && Ditto.getY() == tpY1){
 
 if(Ditto.getX() == tpX2 && Ditto.getY() == tpY2){
 	System.out.println("New area reached: Dark Cave(inner)");
+	System.out.println();
 	Ditto.setX(0);
 	Ditto.setY(0);
 	StageAlt1 alt1 = new StageAlt1();
 	return alt1;
+}
+
+if(Ditto.getX() == tpX3 && Ditto.getY() == tpY3){
+	System.out.println("New area reached: Forest");
+	Ditto.setX(0);
+	Ditto.setY(0);
+	StageFive five = new StageFive();
+	return five;
 }
 
 return null;
