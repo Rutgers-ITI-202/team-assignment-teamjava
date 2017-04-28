@@ -25,7 +25,7 @@ public void function(Adventurer Ditto, Room room){
 		if(room.getPokemons().get(i) instanceof snorlax && Ditto.getX() == room.getPokemons().get(i).getX() && Ditto.getY() == room.getPokemons().get(i).getY()){
 			((snorlax)(room.getPokemons().get(i))).Gentle = true;
 			SnorlaxFound = true;
-			System.out.println(Ditto.getName() + " used poke flute, Snorlax is gently waken up and slowly opening its eyes!");
+			System.out.println(Ditto.getName() + " used poke flute, Snorlax is gently waken up and slowly opened its eyes!");
 			System.out.println();
 		}
 	}
