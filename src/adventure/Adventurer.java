@@ -13,6 +13,9 @@ package adventure;
 import java.util.*;
 
 public class Adventurer extends Pokemons {
+
+protected boolean hasCandy; // Game ending condition
+
 private String name; // Given name to the adventurer
 private	int X; // X coordinate position of the adventurer
 private int Y; // Y coordinate position of the adventurer
@@ -20,7 +23,6 @@ private ArrayList<Items> inventory; // Arraylist that stores the Adventurer's it
 private ArrayList <Pokemons> TransformList; // ArrayList that sotres Pokemons objects
 protected int PP;
 protected int HP;
-private int level;
 protected int maxHP;
 protected String currentForm; // String representation of Ditto's current transformation
 
@@ -28,6 +30,7 @@ private int worldX; // Adventurer's X coordinate on the world map
 private int worldY; // Adventurer's Y coordinate on the world map
 
 public Adventurer (){
+	this.hasCandy = false;
 	
 	this.X = 0;
 	this.Y = 0;
@@ -38,7 +41,6 @@ public Adventurer (){
 	
 	this.worldX = 0;
 	this.worldY = 0;
-	this.level = 1;
 	this.HP = 50;
 	this.maxHP = 50;
 	this.PP = 5;
@@ -477,6 +479,10 @@ public void MoveEast(Room room) { //Updates Adventurer's Y coordinate (+1)
 	
 	if(x instanceof squirtle){
 		((squirtle)x).showDialogue(this);
+	}
+	
+	if(x instanceof snorlax){
+		((snorlax)x).showDialogue(this);
 	}
 	
 	}
