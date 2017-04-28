@@ -1,4 +1,4 @@
-package TextGame;
+package adventure;
 
 public class StageAlt2 extends Room {
 	private int [][] map = new int [3][5];
