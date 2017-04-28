@@ -29,7 +29,7 @@ public void showDialogue(Adventurer james){
 	System.out.println("<Pidgey>: I can fly but as you can see, I am small and too weak to carry you across...");	
 
 	try {
-		TimeUnit.SECONDS.sleep(4);
+		TimeUnit.SECONDS.sleep(3);
 	} catch (InterruptedException e) {
 		e.printStackTrace();
 	}
