@@ -71,7 +71,7 @@ public void showDialogue(Adventurer Ditto){
 			} catch (InterruptedException a) {
 				a.printStackTrace(); }
 			System.out.println("<Sandslash>: Wow, can't believe I won!");
-			System.out.println("( " + Ditto.getName() + "lost 10 HP!)");
+			System.out.println("( " + Ditto.getName() + " lost 10 HP!)");
 			System.out.println();
 			Ditto.setHP(Ditto.getHP()-10);
 		}
