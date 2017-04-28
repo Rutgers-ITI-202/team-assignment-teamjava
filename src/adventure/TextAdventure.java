@@ -62,7 +62,7 @@ public class TextAdventure {
 		System.out.println(Current.displayRoom(Ditto));
 		
 		
-		while(hasCandy == false){
+		while(Ditto.hasCandy == false){
 			System.out.println("Command: ");
 			response = sc.nextLine();
 			boolean ValidCommand = false; // checker instance 
